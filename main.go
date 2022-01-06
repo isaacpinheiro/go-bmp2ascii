@@ -50,9 +50,32 @@ type Color struct {
     Red byte
 }
 
+func generateImage(color []Color, width, height uint32) string {
+
+    var pixel [10]string = [10]string{ " ", ".", ",", ":", ";", "o", "x", "%", "#", "@" }
+    var i, j int32
+    var res string = ""
+
+    for i = int32(height) - 1; i >= 0; i-- {
+
+        for j = 0; j < int32(width); j++ {
+
+            var c Color = color[i*int32(width)+j]
+            var intensity uint8 = uint8(9 - (((int(c.Blue) + int(c.Green) + int(c.Red))*9)/(255*3)))
+            res += pixel[intensity]
+
+        }
+
+        res += "\n"
+
+    }
+
+    return res
+}
+
 func main() {
 
-    var input, output string
+    var input, output, image string
     var inputFile, outputFile *os.File
     var err error
     var bh BitmapHeader
@@ -85,7 +108,7 @@ func main() {
         if len(os.Args) > 2 {
 
             output = os.Args[2]
-            outputFile, err = os.Open(output)
+            outputFile, err = os.Create(output)
 
             if err != nil {
                 log.Fatal(err)
@@ -101,8 +124,13 @@ func main() {
         color = make([]Color, dib.Width * dib.Height)
         binary.Read(inputFile, binary.LittleEndian, &color)
 
-        // TODO
-        fmt.Printf("OK\n")
+        image = generateImage(color, dib.Width, dib.Height)
+
+        if len(os.Args) > 2 {
+            outputFile.WriteString(image)
+        } else {
+            fmt.Printf("%s", image)
+        }
 
     }
 

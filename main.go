@@ -71,6 +71,7 @@ func generateImage(color []Color, width, height uint32) string {
     }
 
     return res
+
 }
 
 func main() {
@@ -84,15 +85,15 @@ func main() {
 
     if len(os.Args) < 2 {
 
-        fmt.Printf("\nbmp2ascii - version: 1.0\n")
+        fmt.Printf("\ngo-bmp2ascii - version: 1.0\n")
         fmt.Printf("Author: Isaac Pinheiro <isaacpnhr@gmail.com>\n\n")
         fmt.Printf("Usage:\n\n")
         fmt.Printf("\tBasic usage:\n\n")
-        fmt.Printf("\t\t$ bmp2ascii /path/to/your/file.bmp\n\n")
+        fmt.Printf("\t\t$ go-bmp2ascii /path/to/your/file.bmp\n\n")
         fmt.Printf("\tGenerating an output file: \n\n")
-        fmt.Printf("\t\t$ bmp2ascii /path/to/your/file.bmp /path/to/your/output_file.txt\n\n")
+        fmt.Printf("\t\t$ go-bmp2ascii /path/to/your/file.bmp /path/to/your/output_file.txt\n\n")
         fmt.Printf("\t\t\tor\n\n")
-        fmt.Printf("\t\t$ bmp2ascii /path/to/your/file.bmp > output_file.txt\n\n")
+        fmt.Printf("\t\t$ go-bmp2ascii /path/to/your/file.bmp > output_file.txt\n\n")
 
     } else {
 
